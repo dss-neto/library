@@ -1,0 +1,291 @@
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+:root {
+  --light: #fdf9e6;
+  --dark: #100f02;
+  --sub-dark: #17170a;
+  --primary: #f3ec82;
+  --secondary: #3b980e;
+  --accent: #18ea1a;
+  font-family: roboto;
+}
+
+html {
+  height: 100%;
+  background-color: rgba(39, 37, 37, 0.993);
+}
+
+body {
+  min-height: 100%;
+}
+
+.card div {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+  text-wrap: balance;
+}
+
+.outmost-container {
+  display: grid;
+  background-color: var(--dark);
+  min-height: 100vh;
+  grid-template-columns: 1fr 3fr;
+}
+
+.sidebar {
+  background-color: var(--sub-dark);
+  color: var(--light);
+  padding: 20px;
+}
+
+.sidebar form.add-book {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar .form-section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar label {
+  text-align: center;
+}
+
+.sidebar input[type="text"] {
+  flex: 1;
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.sidebar input[type="text"]:valid {
+  border-color: #15fd15;
+}
+
+.sidebar input[type="text"]:invalid {
+  border-color: red;
+}
+
+.sidebar input[type="text"]:focus {
+  outline: none;
+}
+
+.checkbox {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  justify-content: center;
+}
+
+.sidebar input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+.sidebar input[type="checkbox"]:hover,
+.sidebar button.submit-book:hover {
+  cursor: pointer;
+}
+
+.sidebar button.submit-book {
+  width: 200px;
+  height: 40px;
+  background-color: var(--primary);
+  font-weight: bolder;
+  border: none;
+  border-radius: 20px;
+  align-self: center;
+}
+
+.sidebar button.submit-book:hover {
+  background-color: var(--accent);
+}
+.cards-container {
+  background-color: var(--dark);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: max-content;
+  margin: 20px;
+  gap: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 40px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--sub-dark) var(--dark);
+}
+
+.greenBorder {
+  border: solid #15fd15 2px;
+  .readState {
+    color: #15fd15;
+  }
+  .svgButtonsContainer svg:hover {
+    fill: #15fd15;
+    cursor: pointer;
+  }
+}
+
+.redBorder {
+  border: solid red 2px;
+  .readState {
+    color: red;
+  }
+  .svgButtonsContainer svg:hover {
+    fill: red;
+    cursor: pointer;
+  }
+}
+
+.card {
+  color: var(--light);
+  background-color: var(--sub-dark);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+  justify-content: space-evenly;
+  padding: 20px 0;
+  border-radius: 20px;
+}
+
+.authorName::before {
+  content: "By: ";
+}
+.releaseYear::before {
+  content: "Year of release: ";
+}
+
+.pageNumber::after {
+  content: " pages";
+}
+
+.card .svgButtonsContainer {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  align-self: center;
+  justify-content: center;
+  gap: 20px;
+}
+.card svg {
+  width: 24px;
+  fill: var(--light);
+}
+
+@media only screen and (max-width: 600px) {
+  .outmost-container {
+    grid-template-rows: 300px 1fr;
+  }
+  .sidebar {
+    grid-row: 1;
+    grid-column: 1/-1;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dark) var(--sub-dark);
+  }
+  .cards-container {
+    grid-row: 2;
+    grid-column: 1/-1;
+  }
+}
+/*
+table {
+  padding: 0;
+  margin: auto;
+  margin-top: 18px;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  border: 1px solid rgb(88, 86, 86);
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+}
+table th {
+  background-color: rgb(37, 34, 34);
+}
+table th:first-child {
+  background-color: #292727;
+}
+
+table td:first-child {
+  background-color: rgb(37, 34, 34);
+}*/

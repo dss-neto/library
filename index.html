@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="outmost-container">
+      <div class="sidebar">
+        <form action="/script.js" method="post" class="add-book" id="add-book">
+          <div class="form-section">
+            <label for="bookName">Name of the book: </label
+            ><input
+              type="text"
+              name="bookName"
+              id="bookName"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="form-section">
+            <label for="authorName">Written by: </label
+            ><input
+              type="text"
+              name="authorName"
+              id="authorName"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="form-section">
+            <label for="releaseYear">In the year of: </label
+            ><input
+              type="text"
+              name="releaseYear"
+              id="releaseYear"
+              autocomplete="off"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              required
+            />
+          </div>
+
+          <div class="form-section">
+            <label for="pageNumber">Amount of pages: </label
+            ><input
+              type="text"
+              name="pageNumber"
+              id="pageNumber"
+              autocomplete="off"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              required
+            />
+          </div>
+
+          <div class="form-section">
+            <div class="checkbox">
+              <label for="readState">Have you read it? </label
+              ><input type="checkbox" name="readState" id="readState" />
+            </div>
+          </div>
+
+          <button type="submit" class="submit-book" id="submitBook">
+            Add the book
+          </button>
+        </form>
+      </div>
+      <div class="cards-container" id="cards-container"></div>
+    </div>
+  </body>
+  <!--
+  <table id="table">
+    <thead>
+      <tr>
+        <th>Books</th>
+        <th>Author</th>
+        <th>Release year</th>
+        <th>Page number</th>
+        <th>Read?</th>
+      </tr>
+    </thead>
+    <tr>
+      <td>THEEEEEEEEE</td>
+      <td>Who knows</td>
+      <td>1927</td>
+      <td>12</td>
+      <td>Didn't read</td>
+    </tr>
+  </table>-->
+
+  <script src="script.js"></script>
+</html>
