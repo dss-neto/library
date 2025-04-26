@@ -264,28 +264,3 @@ body {
     grid-column: 1/-1;
   }
 }
-/*
-table {
-  padding: 0;
-  margin: auto;
-  margin-top: 18px;
-  border-collapse: collapse;
-}
-
-table th,
-table td {
-  border: 1px solid rgb(88, 86, 86);
-  padding: 10px;
-  margin: 0;
-  text-align: center;
-}
-table th {
-  background-color: rgb(37, 34, 34);
-}
-table th:first-child {
-  background-color: #292727;
-}
-
-table td:first-child {
-  background-color: rgb(37, 34, 34);
-}*/
