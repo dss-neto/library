@@ -41,6 +41,7 @@ bookForm.addEventListener("submit", (e) => {
     formObject.pageNumber,
     formObject.readState
   );
+  dialog.close();
 });
 
 function Book(bookName, authorName, releaseYear, pageNumber, readState) {
