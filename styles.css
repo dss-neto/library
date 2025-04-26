@@ -284,4 +284,7 @@ dialog::backdrop {
   .double {
     flex-direction: column;
   }
+  .header {
+    justify-content: center;
+  }
 }
