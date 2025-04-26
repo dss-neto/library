@@ -1,6 +1,9 @@
 const cardsContainer = document.getElementById("cards-container");
 const myLibrary = [];
 const bookForm = document.querySelector("#add-book");
+const dialog = document.querySelector("dialog");
+const showDialogButton = document.querySelector("#showDialog");
+const cancelDialogButton = document.querySelector("#cancelDialog");
 
 const bookPrototype = {
   toggleRead(card) {
@@ -18,6 +21,14 @@ const bookPrototype = {
     }
   },
 };
+
+showDialogButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+cancelDialogButton.addEventListener("click", () => {
+  dialog.close();
+});
 
 bookForm.addEventListener("submit", (e) => {
   e.preventDefault();
