@@ -258,7 +258,7 @@ dialog {
   width: 100%;
   align-self: center;
   justify-content: center;
-  max-height: fit-content;
+  max-height: 24px;
   gap: 20px;
 }
 .card svg {
