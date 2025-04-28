@@ -58,6 +58,7 @@
                   autocomplete="off"
                   inputmode="numeric"
                   pattern="[0-9]*"
+                  maxlength="5"
                   required
                 />
               </div>
@@ -70,9 +71,32 @@
                   autocomplete="off"
                   inputmode="numeric"
                   pattern="[0-9]*"
+                  maxlength="9"
                   required
                 />
               </div>
+            </div>
+            <div class="form-section">
+              <label for="backgroundImageURL"
+                ><span class="show"
+                  >Book's cover url: (optional)<span class="asterisk"
+                    >*</span
+                  ></span
+                ><br /><span class="hide"
+                  >Insert "<span class="red">random</span>" for a random book
+                  cover.</span
+                ></label
+              >
+              <input
+                type="text"
+                inputmode="url"
+                class="url"
+                name="backgroundImageURL"
+                id="backgroundImageURL"
+                pattern="random|https?://.+"
+                placeholder="https://m.media-amazon.com/images/I/71OZY035QKL.jpg"
+                autocomplete="off"
+              />
             </div>
             <div class="form-section">
               <div class="checkbox">
@@ -90,7 +114,7 @@
             </div>
           </form>
         </dialog>
-        <button class="showDialog" id="showDialog">Add the book</button>
+        <button class="showDialog" id="showDialog">Add a book</button>
       </div>
       <div class="cards-container" id="cards-container"></div>
     </div>
