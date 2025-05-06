@@ -76,7 +76,7 @@ function addBookToLibrary(
   } else {
     read = "Didn't read.";
   }
-  let bookObject = new Book(
+  const bookObject = new Book(
     bookName,
     authorName,
     releaseYear,
