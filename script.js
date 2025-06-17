@@ -1,3 +1,5 @@
+"use strict";
+
 const cardsContainer = document.getElementById("cards-container");
 const myLibrary = [];
 const bookForm = document.querySelector("#add-book");
@@ -5,9 +7,9 @@ const dialog = document.querySelector("dialog");
 const showDialogButton = document.querySelector("#showDialog");
 const cancelDialogButton = document.querySelector("#cancelDialog");
 
-const bookPrototype = {
+class Book {
   toggleRead(card) {
-    readText = card.querySelector(".readState");
+    const readText = card.querySelector(".readState");
     if (this.readState === "Didn't read.") {
       this.readState = "I've read.";
       readText.textContent = this.readState;
@@ -19,8 +21,32 @@ const bookPrototype = {
       card.classList.remove("greenBorder");
       card.classList.add("redBorder");
     }
-  },
-};
+  }
+
+  constructor(
+    bookName,
+    authorName,
+    releaseYear,
+    pageNumber,
+    readState,
+    backgroundImageURL
+  ) {
+    this.id = crypto.randomUUID();
+    this.bookName = bookName;
+    this.authorName = authorName;
+    this.releaseYear = releaseYear;
+    this.pageNumber = pageNumber;
+    if (readState) {
+      this.readState = "I've read.";
+    } else {
+      this.readState = "Didn't read.";
+    }
+    this.backgroundImageURL = backgroundImageURL;
+
+    updateGrid(this);
+    myLibrary.push(this);
+  }
+}
 
 showDialogButton.addEventListener("click", () => {
   dialog.showModal();
@@ -34,7 +60,7 @@ bookForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(bookForm);
   const formObject = Object.fromEntries(formData);
-  addBookToLibrary(
+  new Book(
     formObject.bookName,
     formObject.authorName,
     formObject.releaseYear,
@@ -45,56 +71,12 @@ bookForm.addEventListener("submit", (e) => {
   dialog.close();
 });
 
-function Book(
-  bookName,
-  authorName,
-  releaseYear,
-  pageNumber,
-  readState,
-  backgroundImageURL
-) {
-  this.id = crypto.randomUUID();
-  this.bookName = bookName;
-  this.authorName = authorName;
-  this.releaseYear = releaseYear;
-  this.pageNumber = pageNumber;
-  this.readState = readState;
-  this.backgroundImageURL = backgroundImageURL;
-}
-
-function addBookToLibrary(
-  bookName,
-  authorName,
-  releaseYear,
-  pageNumber,
-  readState,
-  backgroundImageURL
-) {
-  let read;
-  if (readState) {
-    read = "I've read.";
-  } else {
-    read = "Didn't read.";
-  }
-  const bookObject = new Book(
-    bookName,
-    authorName,
-    releaseYear,
-    pageNumber,
-    read,
-    backgroundImageURL
-  );
-  Object.setPrototypeOf(bookObject, bookPrototype);
-  futureUpdateGrid(bookObject);
-  myLibrary.push(bookObject);
-}
-
-function futureUpdateGrid(bookObject) {
+function updateGrid(bookObject) {
   const card = document.createElement("div");
   card.classList.add("card");
   card.id = bookObject.id;
-  for (key in bookObject) {
-    if (key !== "id" && key !== "toggleRead" && key !== "backgroundImageURL") {
+  for (let key in bookObject) {
+    if (key !== "id" && key !== "backgroundImageURL") {
       const cardText = document.createElement("div");
       cardText.classList.add(key);
       cardText.textContent = bookObject[key];
@@ -126,7 +108,7 @@ function futureUpdateGrid(bookObject) {
 
 function setRemoveBookInteraction(card) {
   const removeButton = card.querySelector("#removeBook");
-  removeButton.addEventListener("click", (e) => {
+  removeButton.addEventListener("click", () => {
     for (let index in myLibrary) {
       if (myLibrary[index].id === card.id) {
         myLibrary.splice(index, 1);
@@ -139,7 +121,7 @@ function setRemoveBookInteraction(card) {
 
 function setToggleReadInteraction(card) {
   const toggleRead = card.querySelector("#toggleRead");
-  toggleRead.addEventListener("click", (e) => {
+  toggleRead.addEventListener("click", () => {
     for (let index in myLibrary) {
       if (myLibrary[index].id === card.id) {
         myLibrary[index].toggleRead(card);
@@ -152,7 +134,7 @@ function setToggleReadInteraction(card) {
 function getRandomInt(min, max) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The minimum is inclusive and the maximum is exclusive
 }
 
 const defaultBookCoversURL = [
